@@ -10,16 +10,16 @@ int _printf(const char *format, ...)
 {
 	va_list list;
 	const char *c, *s; /*To be initialized as char format and string format*/
-	/*int i = 0;*/
 
 	va_start(list, format);
+
 	if (format == NULL)
 		return (-1);
 	for (c = format; *c != '\0'; c++)
 	{
 		if (*c != '%')
 		{
-			putchar(*c);
+			_putchar(*c);
 			continue;
 		}
 		switch (*++c)
@@ -30,21 +30,25 @@ int _printf(const char *format, ...)
 				s = "(null)";
 			while (*s != '\0')
 			{
-				putchar(*s);
+				_putchar(*s);
 				s++;
 			}
 			break;
 		case 'c':
-			putchar(va_arg(list, int));
+			_putchar(va_arg(list, int));
+			break;
+		case 'i':
+		case 'd':
+			_putchar(va_arg(list, int));
 			break;
 		case '%':
-			putchar(*c);
+			_putchar(*c);
 			break;
 		default:
-			putchar('%');
+			_putchar('%');
 			while (*c != '\0')
 			{
-				putchar(*c);
+				_putchar(*c);
 				c++;
 			}
 			break;
