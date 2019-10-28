@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "holberton.h"
 /**
  * _printf - prints anything (output) according to a format
@@ -35,10 +34,6 @@ int _printf(const char *format, ...)
 			}
 			break;
 		case 'c':
-			_putchar(va_arg(list, int));
-			break;
-		case 'i':
-		case 'd':
 			_putchar(va_arg(list, int));
 			break;
 		case '%':
