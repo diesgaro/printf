@@ -12,30 +12,29 @@ int _printf(const char *format, ...)
 	const char *c, *s; /*To be initialized as char format and string format*/
 
 	va_start(list, format);
-	while (format != NULL)
-	{
-		for (c = format; *c != '\0'; c++)
-		{
-			if (*c != '%')
-			{
-				putchar(*c);
-				continue;
-			}
+	if (format == NULL)
+		return (-1);
 
-			switch (*++c)
-			{
-			case 's':
-				for (s = va_arg(list, char*); *s != '\0'; s++)
-					putchar(*s);
-				break;
-			case 'c':
-				putchar(va_arg(list, int));
-				break;
-			case '%':
-				putchar('%');
-			}
+	for (c = format; *c != '\0'; c++)
+	{
+		if (*c != '%')
+		{
+			putchar(*c);
+			continue;
 		}
-		break;
+
+		switch (*++c)
+		{
+		case 's':
+			for (s = va_arg(list, char*); *s != '\0'; s++)
+				putchar(*s);
+			break;
+		case 'c':
+			putchar(va_arg(list, int));
+			break;
+		default:
+			return (-1);
+		}
 	}
 	va_end(list);
 	return (0);
