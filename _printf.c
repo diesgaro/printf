@@ -8,7 +8,7 @@
 int _printf(const char *format, ...)
 {
 	va_list list;
-	const char *c, *s; /*To be initialized as char format and string format*/
+	const char *c, *s, *index; /*To be initialized as char format and string format*/
 
 	va_start(list, format);
 
@@ -21,32 +21,36 @@ int _printf(const char *format, ...)
 			_putchar(*c);
 			continue;
 		}
-		switch (*++c)
+		else
 		{
-		case 's':
-			s = va_arg(list, char*);
-			if (s == NULL)
-				s = "(null)";
-			while (*s != '\0')
+			index = c + 1;
+
+			switch (*index)
 			{
-				_putchar(*s);
-				s++;
-			}
-			break;
-		case 'c':
-			_putchar(va_arg(list, int));
-			break;
-		case '%':
-			_putchar(*c);
-			break;
-		default:
-			_putchar('%');
-			while (*c != '\0')
-			{
+			case 's':
+				s = va_arg(list, char*);
+				if (s == NULL)
+					s = "(null)";
+				while (*s != '\0')
+				{
+					_putchar(*s);
+					s++;
+				}
+				c = index;
+				break;
+			case 'c':
+				_putchar(va_arg(list, int));
+				c = index;
+				break;
+			case '%':
 				_putchar(*c);
-				c++;
+				c = index;
+				break;
+			default:
+				if (*index != '\0')
+					_putchar(*c);
+				break;
 			}
-			break;
 		}
 	}
 	va_end(list);
