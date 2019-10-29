@@ -8,7 +8,7 @@
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int i = 0, index = 0, x = 0, count = 0, (*gof)(va_list list);
+	int i = 0, index = 0, count = 0, (*gof)(va_list list);
 
 	va_start(list, format);
 	if ((format == NULL) || (format[0] == '%' && format[1] == '\0'))
