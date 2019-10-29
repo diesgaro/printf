@@ -8,46 +8,74 @@
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int i = 0, index = 0, x = 0;
-
-	op_t options[] = {
-		{"c", op_char},
-		{"s", op_string},
-		{"%", op_percent},
-		{NULL, NULL}
-	};
+	int i = 0, index = 0, x = 0, count = 0, (*gof)(va_list list);
 
 	va_start(list, format);
-
-	if (format == NULL)
+	if ((format == NULL) || (format[0] == '%' && format[1] == '\0'))
 	{
 		return (-1);
 	}
 	else
 	{
-		while (format[i] != '\0')
+		for (i = 0; format[i] != '\0'; i++)
 		{
+			index = i + 1;
 			if (format[i] != '%')
 			{
 				_putchar(format[i]);
+				count++;
+			}
+			else if (format[i] == '%' && format[index] == '%')
+			{
+				_putchar('%');
+				i = index;
+				count++;
 			}
 			else
 			{
-				index = i + 1;
-				x = 0;
-				while (options[x].op != '\0')
+				gof = get_op_func(&format[index]);
+				if (gof != NULL)
 				{
-					if (format[index] == options[x].op[0])
-						options[x].f(list);
-					x++;
+					count += gof(list);
+					i = index;
 				}
-				i = index;
+				else
+					_putchar(format[i]);
 			}
-			i++;
 		}
 	}
 	va_end(list);
-	return (0);
+	return (count);
+}
+
+/**
+ * get_op_func - Function that selects the fucntion to perform the operation
+ * asked by the user
+ *
+ * @s: Pointer type char
+ *
+ * Return: 0
+ */
+int (*get_op_func(const char *s))(va_list list)
+{
+	op_t ops[] = {
+		{"c", op_char},
+		{"s", op_string},
+		{NULL, NULL}
+	};
+
+	int i;
+
+	i = 0;
+
+	while (ops[i].op != NULL)
+	{
+		if (ops[i].op[0] == s[0])
+			return (ops[i].f);
+		i++;
+	}
+
+	return (NULL);
 }
 
 /**
@@ -58,9 +86,10 @@ int _printf(const char *format, ...)
  *Return: 0
  *
  */
-void op_char(va_list list)
+int op_char(va_list list)
 {
 	_putchar(va_arg(list, int));
+	return (1);
 }
 
 /**
@@ -71,28 +100,20 @@ void op_char(va_list list)
  *Return: 0
  *
  */
-void op_string(va_list list)
+int op_string(va_list list)
 {
 	char *s = va_arg(list, char*);
+	int count = 0;
 
 	if (s == NULL)
 		s = "(null)";
+
 	while (*s != '\0')
 	{
 		_putchar(*s);
 		s++;
+		count++;
 	}
-}
 
-/**
- * op_percent - Function that prints percent
- *
- * @list: Variable type va_list
- *
- *Return: 0
- *
- */
-void op_percent()
-{
-	_putchar('%');
+	return (count);
 }

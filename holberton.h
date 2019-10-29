@@ -17,11 +17,11 @@ int _putchar(char c);
 typedef struct op
 {
 	char *op;
-	void (*f)();
+	int (*f)();
 } op_t;
 
-void op_char(va_list list);
-void op_string(va_list list);
-void op_percent();
+int op_char(va_list list);
+int op_string(va_list list);
+int (*get_op_func(const char *s))(va_list list);
 
 #endif /* HOLBERTON_H */
