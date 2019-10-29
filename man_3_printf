@@ -1,0 +1,105 @@
+.Dd 29/10/2019
+.Dt _printf
+.Os Linux
+.Sh NAME
+.Nm _printf.
+.Nd modified printf function. Take a formar and arguments to standard output
+.Sh SYNOPSIS
+.Pp
+Fl #define "Holberton.h"
+.Pp
+Fl int _printf (const char *format, ...);
+.Sh DESCRIPTION
+_printf is a smaller copy of printf. The function performs an output according
+to a format (described below). The function generates an output to stdout.
+Like printf, _printf works with a variable number of arguments.
+.Pp
+
+The function generates an output according to a format string, for example,
+"%X", which specifies the format of the arguments passed as parameters of the
+function.
+.Pp
+
+.Fl Return Value
+.Pp
+If the return is successful, _printf returns the number of characters printed.
+The null byte that is to mark the end of a string is excluded.
+If an output error is generated, the return will be of a negative value.
+In the case of _printf, the return is (-1)
+
+
+.Fl Format of the format string
+.Pp
+Format of the format string
+We can define the format string as a character string composed of a series of
+directives, which _printf receives as the "format" parameter:
+.Pp
+
+1) Ordinary characters (except %), which are copied without any change to the
+standard output.
+.Pp
+
+For example _printf ("Hello World") will print "Hello World" - without the
+double quotes.
+.Pp
+
+2) Conversion specifications, which are those that modify the outputs that are
+copied without changes in the output sequence.
+.Pp
+
+On the other hand, the arguments are received by _printf thanks to a variable
+function (va_arg) and must correspond to the specified conversion specifier.
+.Pp
+
+For example _printf ("% d", 5) will print "5" - without the double quotes.
+.Pp
+
+.Fl Conversion specifiers
+
+The% character is followed by zero or only one of the following indicators:
+d, i The output is a signed integer.
+.Pp
+
+c Convert the argument to an unsigned character and generate an output with the
+resulting character.
+.Pp
+
+s The argument is const char * a pointer to an array of character types
+(pointer to a string). The output does not include a null termination byte
+('\ 0').
+.Pp
+
+% Create an % as a output. There isnn't argument converted. So, the complete
+conversion specification is '%%'.
+.El
+.Pp
+.Sh FILES
+.Bl -tag -width "/Users/joeuser/Library/really_long_file_name" -compact
+.It Pa holberton.h
+Contain all function to create _printf function
+.It get_op_func.c
+Contain a struct and while loop to choose conversion specifier.
+.It _putchar.c
+_printf works with a customized putchar function.
+.Sh EXAMPLES
+Fl _printf("Actual     : %cAAA\n", 'a');
+.Pp
+Output: aAAA
+.Pp
+Fl elen = _printf("%d\n", 555); _printf("%d\n", elen);
+.Pp
+Output: 555
+.Pp
+Fl elen = _printf("%c\n", c); _printf("%d\n", elen);
+.Pp
+Output: z
+.Pp
+Fl elen = _printf("%%%%); _printf("%d\n", elen);
+.Pp
+Output: %%
+.Sh AUTHORS
+Diego Betancourt
+.Pp
+Diego Garzon
+.Pp
+City: HOLBERTON CAL
