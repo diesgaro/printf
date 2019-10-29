@@ -2,11 +2,11 @@
 
 Modified version of printf function that produces output according to a format.
 
-## Requeriments
+## Requeriments 📋
 
 Ubuntu 14.04 LTS and gcc 4.8.4 with the flags -Wall -Werror -Wextra and -pedantic
 
-## Authorized functions and macros
+## Authorized functions and macros 🚀
 * write (man 2 write)
 * malloc (man 3 malloc)
 * free (man 3 free)
@@ -15,7 +15,7 @@ Ubuntu 14.04 LTS and gcc 4.8.4 with the flags -Wall -Werror -Wextra and -pedanti
 * va_copy (man 3 va_copy)
 * va_arg (man 3 va_arg)
 
-## Exercises
+## Exercises ⚙️
 
 ### [0. _printf](https://github.com/dfbq91/printf/blob/master/_printf.c)
 0. I'm not going anywhere. You can print that wherever you want to. I'm here and I'm a Spur for life mandatory
@@ -34,7 +34,7 @@ format is a character string. The format string is composed of zero or more dire
 * You don’t have to handle precision
 * You don’t have to handle the length modifiers
 
-### [2. printf](https://github.com/dfbq91/printf/blob/master/_printf.c)
+### [1. printf](https://github.com/dfbq91/printf/blob/master/_printf.c)
 Handle the following conversion specifiers:
 * d
 * i
@@ -43,3 +43,6 @@ Handle the following conversion specifiers:
 * You don’t have to handle precision
 * You don’t have to handle the length modifiers
 * Write a function that checks for a digit (0 through 9).
+
+### [man_3_printf](https://github.com/dfbq91/printf/blob/master/man_3_printf)
+Create a man page for your function.
