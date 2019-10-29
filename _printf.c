@@ -134,6 +134,7 @@ int fnc_put_number_recursion(unsigned int number)
 	if (r_div != 0)
 	{
 		count += (fnc_put_number_recursion(r_div));
+		count++;
 		_putchar(r_mod + '0');
 	}
 	else
