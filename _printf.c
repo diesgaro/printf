@@ -11,39 +11,40 @@ int _printf(const char *format, ...)
 	int i = 0, index = 0, count = 0, (*gof)(va_list list);
 
 	va_start(list, format);
+
 	if ((format == NULL) || (format[0] == '%' && format[1] == '\0'))
-	{
 		return (-1);
-	}
-	else
+
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		for (i = 0; format[i] != '\0'; i++)
+		index = i + 1;
+		if (format[i] != '%')
 		{
-			index = i + 1;
-			if (format[i] != '%')
+			_putchar(format[i]);
+			count++;
+		}
+		else if (format[i] == '%' && format[index] == '%')
+		{
+			_putchar('%');
+			i = index;
+			count++;
+		}
+		else
+		{
+			gof = get_op_func(&format[index]);
+			if (gof != NULL)
+			{
+				count += gof(list);
+				i = index;
+			}
+			else
 			{
 				_putchar(format[i]);
 				count++;
 			}
-			else if (format[i] == '%' && format[index] == '%')
-			{
-				_putchar('%');
-				i = index;
-				count++;
-			}
-			else
-			{
-				gof = get_op_func(&format[index]);
-				if (gof != NULL)
-				{
-					count += gof(list);
-					i = index;
-				}
-				else
-					_putchar(format[i]);
-			}
 		}
 	}
+
 	va_end(list);
 	return (count);
 }
