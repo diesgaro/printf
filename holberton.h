@@ -22,6 +22,8 @@ typedef struct op
 
 int op_char(va_list list);
 int op_string(va_list list);
+int op_integer(va_list list);
 int (*get_op_func(const char *s))(va_list list);
+int fnc_put_number_recursion(unsigned int number);
 
 #endif /* HOLBERTON_H */

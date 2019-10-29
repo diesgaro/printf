@@ -44,39 +44,8 @@ int _printf(const char *format, ...)
 			}
 		}
 	}
-
 	va_end(list);
 	return (count);
-}
-
-/**
- * get_op_func - Function that selects the fucntion to perform the operation
- * asked by the user
- *
- * @s: Pointer type char
- *
- * Return: 0
- */
-int (*get_op_func(const char *s))(va_list list)
-{
-	op_t ops[] = {
-		{"c", op_char},
-		{"s", op_string},
-		{NULL, NULL}
-	};
-
-	int i;
-
-	i = 0;
-
-	while (ops[i].op != NULL)
-	{
-		if (ops[i].op[0] == s[0])
-			return (ops[i].f);
-		i++;
-	}
-
-	return (NULL);
 }
 
 /**
@@ -113,6 +82,63 @@ int op_string(va_list list)
 	{
 		_putchar(*s);
 		s++;
+		count++;
+	}
+
+	return (count);
+}
+
+/**
+ * op_integer - Function that prints integer or decimal
+ *
+ * @list: Variable type va_list
+ *
+ *Return: 0
+ *
+ */
+int op_integer(va_list list)
+{
+	int number = va_arg(list, int);
+	unsigned int positive = 0;
+	int count = 0;
+
+	if (number < 0)
+	{
+		_putchar('-');
+		count++;
+		positive = number * (-1);
+	}
+	else
+	{
+		positive = number;
+	}
+
+	count += fnc_put_number_recursion(positive);
+
+	return (count);
+}
+
+/**
+ * fnc_put_number_recursion - Function that prints the numbers with recursion
+ * @number: Variable unsigned int type
+ * Return: Count to the numbers prints
+ */
+int fnc_put_number_recursion(unsigned int number)
+{
+	unsigned int r_mod, r_div;
+	int count = 0;
+
+	r_mod = number % 10;
+	r_div = number / 10;
+
+	if (r_div != 0)
+	{
+		count += (fnc_put_number_recursion(r_div));
+		_putchar(r_mod + '0');
+	}
+	else
+	{
+		_putchar(number + '0');
 		count++;
 	}
 
