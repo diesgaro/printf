@@ -56,7 +56,7 @@ For example _printf ("% d", 5) will print "5" - without the double quotes.
 
 .Fl Conversion specifiers
 
-The% character is followed by zero or only one of the following indicators:
+The % character is followed by zero or only one of the following indicators:
 d, i The output is a signed integer.
 .Pp
 
@@ -67,6 +67,9 @@ resulting character.
 s The argument is const char * a pointer to an array of character types
 (pointer to a string). The output does not include a null termination byte
 ('\ 0').
+.Pp
+
+b Convert the argument to a binary number
 .Pp
 
 % Create an % as a output. There isnn't argument converted. So, the complete
