@@ -14,6 +14,7 @@ int (*get_op_func(const char *s))(va_list list)
 		{"s", op_string},
 		{"i", op_integer},
 		{"d", op_integer},
+		{"b", op_binary},
 		{NULL, NULL}
 	};
 
