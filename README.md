@@ -43,6 +43,7 @@ Handle the following conversion specifiers:
 * You don’t have to handle precision
 * You don’t have to handle the length modifiers
 * Write a function that checks for a digit (0 through 9).
+* Another option.
 
 ### [man_3_printf](https://github.com/dfbq91/printf/blob/master/man_3_printf)
 Create a man page for your function.
